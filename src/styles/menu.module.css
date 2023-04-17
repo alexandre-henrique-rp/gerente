@@ -1,0 +1,48 @@
+.menuGeral {
+  width: 100%;
+  height: 100%;
+  border-bottom: 1px solid #666666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.avatarImg {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 2rem;
+  margin: auto;
+}
+
+.logo {
+  width: 20rem;
+text-align: center;
+}
+
+.avatarArea{
+  width: 12rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.avatarArea h5{
+ text-align: center;
+}
+
+.menuLink {
+  display: flex;
+  text-align: end;
+  gap: 1.5rem;
+  margin-right: 5rem;
+}
+
+.menuLink a {
+  text-decoration: none;
+  color: #666666;
+}
+
+.menuLink a:hover {
+  color: green;
+  text-decoration: underline;
+  font-weight: bold;
+}
