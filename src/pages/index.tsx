@@ -1,3 +1,4 @@
+import { ExtratoGeral } from "@/components/painel/extratoGeral";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -12,7 +13,9 @@ export default function Home() {
         <div style={{height: '15rem', width: '35em', backgroundColor: 'blue'}}>3</div>
       </div>
       <div style={{height: '5rem', width: '100%', backgroundColor: 'brown'}}></div>
-      <div></div>
+      <div style={{paddingTop: '2rem'}}>
+        <ExtratoGeral />
+      </div>
     </section>
   );
 }

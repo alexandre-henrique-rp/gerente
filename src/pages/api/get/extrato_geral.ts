@@ -9,14 +9,28 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     const response: any = await notion.databases.query({
       database_id: DataBase,
     });
-    console.log(response)
+   
+    const rest = response.results
 
-   /*  if (response.results[0] === undefined) {
-      res.status(400).send("Ususario não encontrado");
-    }
-    const [repData] = response.results;
-    const retorna: any = repData.properties; */
-    res.status(200).json(response);
+    const MapResponse = await rest.map((i: any)=>{
+      const dados = i.properties
+      const resp = {
+        id: dados.id.formula?.string,
+        conta: dados.conta.title[0].plain_text,
+        trasacao: dados.trasacao.select?.name,
+        typePg: dados.typePg.select?.name,
+        total: dados.total.formula?.number,
+        obs: dados.obs.rich_text[0]?.plain_text,
+        valor: dados.valor?.number,
+        pagamento: dados.pagamento.date?.start,
+        status: dados.Status.formula?.string,
+        vencimento: dados.vencimento.date?.start,
+      }
+      return resp;
+    })
+
+    const retorno = await Promise.all(MapResponse);
+    res.status(200).json({retorno});
   } else {
     res
       .status(405)
