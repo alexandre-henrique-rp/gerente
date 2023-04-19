@@ -7,3 +7,7 @@ body {
   color: #666666;
   background-color: azure;
 }
+
+label{
+  font-weight: 600;
+}

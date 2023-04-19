@@ -17,8 +17,8 @@ export default function MenuDeskTop(): JSX.Element {
         <div style={{display: 'flex', alignItems: 'center'}}>
           <div className={style.menuLink}>
             <Link href="/">Home</Link>
-            <Link href="/about">Add despesa</Link>
-            <Link href="/contact">Add renda</Link>
+            <Link href="/Debito">Add despesa</Link>
+            <Link href="/Credito">Add renda</Link>
             <a onClick={() => router.push('/api/auth/signout')}>Logout</a>
           </div>
           <div className={style.avatarArea}>

@@ -13,7 +13,7 @@ export default function Home() {
         <div style={{height: '15rem', width: '35em', backgroundColor: 'blue'}}>3</div>
       </div>
       <div style={{height: '5rem', width: '100%', backgroundColor: 'brown'}}></div>
-      <div style={{paddingTop: '2rem'}}>
+      <div style={{padding: '2rem 10rem', display: 'flex', flexWrap: 'wrap', fontSize: '13px'}}>
         <ExtratoGeral />
       </div>
     </section>

@@ -1,0 +1,58 @@
+.container {
+  width: 100vw;
+  height: 92.2vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 50rem;
+  height: 20rem;
+  padding: 2rem;
+  border: 1px solid #666666;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.display1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.display1 input{
+ margin-left: 10px;
+}
+
+.obsArea {
+  display: flex;
+}
+.obsArea textarea {
+  width: 695px;
+  height: 100px;
+  margin-left: 16px;
+}
+
+.display2 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.display2 label{
+  margin-right: 10px;
+}
+
+.display3{
+ display: flex;
+ flex-direction: row;
+ justify-content: space-around;
+}
+
+.btmArea{
+  display: flex;
+  gap: 10px;
+}

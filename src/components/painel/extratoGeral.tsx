@@ -17,18 +17,7 @@ export const ExtratoGeral = (): JSX.Element => {
 
   return (
     <>
-      <div>
         {dados.map((item: any) => {
-          // "id": "2059585ef9fa4cf28a9ff014ae2a9aa8",
-          // "conta": "marmitex",
-          // "trasacao": "Debito",
-          // "typePg": "Debito",
-          // "total": -15,
-          // "obs": "marmitex ",
-          // "valor": 15,
-          // "pagamento": "2023-04-17",
-          // "status": "Pg",
-          // "vencimento": "2023-04-17"
           const date = new Date(item.vencimento);
           const dataAtual = date.toLocaleDateString();
           const date2 = new Date(item.pagamento);
@@ -38,42 +27,38 @@ export const ExtratoGeral = (): JSX.Element => {
               <div
                 key={item.id}
                 style={{
-                  width: "80%",
+                  width: "20rem",
+                  height: "13rem",
                   border: "1px solid #666666",
                   margin: "0.5rem auto",
-                  borderRadius: "10px"
+                  borderRadius: "10px",
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between'
                 }}
               >
+                <div style={{ width: "100%", margin: "2rem 1.3rem" }}>
+                  <h3>{item.conta}</h3>
+                </div>
+
                 <div
                   style={{
+                    width: '100%',
                     display: "flex",
                     justifyContent: "space-around",
-                    padding: "0.2rem"
+                    flexWrap: 'wrap',
+                    padding: "0.2rem",
                   }}
                 >
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <label>Id: </label> <p>{item.id}</p>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <label>Conta: </label> <p>{item.conta}</p>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  <div style={{ display: "flex", alignItems: "center", margin: '0 0.2rem', gap: '5px'}}>
                     <label>Tramsação: </label>
                     <p>{item.trasacao}</p>
                   </div>
-                </div>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-around",
-                    padding: "0.2rem"
-                  }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  <div style={{ display: "flex", alignItems: "center", margin: '0 0.2rem', gap: '5px'}}>
                     <label>Tipo de pagamento: </label>
                     <p>{item.typePg}</p>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  <div style={{ display: "flex", alignItems: "center", margin: '0 0.2rem', gap: '5px'}}>
                     <label>Valor: </label>
                     <p>
                       {item.valor.toLocaleString("pt-BR", {
@@ -82,27 +67,29 @@ export const ExtratoGeral = (): JSX.Element => {
                       })}
                     </p>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  <div style={{ display: "flex", alignItems: "center", margin: '0 0.2rem', gap: '5px'}}>
                     <label>Vencimento: </label>
                     <p>{dataAtual === "Invalid Date" ? "" : dataAtual}</p>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", margin: '0 0.2rem', gap: '5px'}}>
+                    <label>Data de pagamento: </label>
+                    <p>{dataAtual2 === "Invalid Date" ? "" : dataAtual2}</p>
                   </div>
                 </div>
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "space-around",
-                    padding: "0.5rem"
+                    width: '100%',
+                    padding: "0.5rem",
+
                   }}
-                >
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  >
+                  <div style={{ display: "flex", alignItems: "center", margin: '0 0.2rem', gap: '5px'}}>
                     <label>Status: </label>
                     <p>{item.status}</p>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <label>Data de pagamento: </label>
-                    <p>{ dataAtual2 === "Invalid Date" ? "" : dataAtual2}</p>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center" }}>
+                  <div style={{ display: "flex", alignItems: "center", margin: '0 0.2rem', gap: '5px'}}>
                     <label>Total: </label>
                     <p>
                       {item.total.toLocaleString("pt-BR", {
@@ -116,7 +103,6 @@ export const ExtratoGeral = (): JSX.Element => {
             </>
           );
         })}
-      </div>
     </>
   );
 };

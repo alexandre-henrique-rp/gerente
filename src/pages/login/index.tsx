@@ -9,18 +9,12 @@ const login: NextPage = (): JSX.Element => {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    const res = await signIn('credentials', {
+    await signIn('credentials', {
       email: user,
       password: pass,
       redirect: false,
     });
-    console.log(res)
-    
-    // if (res.status !== 200) {
-      
-    // }
   };
-
 
   return (
     <>

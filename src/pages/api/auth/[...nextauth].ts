@@ -121,6 +121,7 @@ export default NextAuth({
         token.cel = user.cel;
         token.aniversario = user.aniversario;
         token.avatar = user.avatar;
+        token.jwt = token.jti
 
         token.expiration = actualDateInSeconds + tokenExpirationInSeconds;
       } else {
@@ -153,8 +154,7 @@ export default NextAuth({
         avatar: token.avatar as string,
       };
 
-      session.token = token.JWT as string;
-      session.token = token.jwt as string;
+      session.token = token.jti as string;
       return session;
     }
   }
