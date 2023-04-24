@@ -15,7 +15,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     const MapResponse = await rest.map((i: any)=>{
       const dados = i.properties
       const resp = {
-        id: dados.id.formula?.string,
+        id: i.id,
         conta: dados.conta.title[0].plain_text,
         trasacao: dados.trasacao.select?.name,
         typePg: dados.typePg.select?.name,

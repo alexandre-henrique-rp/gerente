@@ -69,7 +69,7 @@ export default NextAuth({
           const id = user.id;
           const avatar = user.avatar;
 
-          console.log(name)
+          
 
           const response = {
             id: id,
@@ -85,10 +85,9 @@ export default NextAuth({
           if (!id || !name || !status) {
             return null;
           }
-          console.log(response)
+
           return response;
         } catch (e) {
-          console.log('aki')
           console.log(e);
           return null;
         }

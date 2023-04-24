@@ -1,13 +1,43 @@
 import { NextPage } from "next";
-import React from "react";
+import React, { useState } from "react";
 import style from "./style.module.css";
+import { useRouter } from "next/router";
+import { Tagsde } from "@/components/data/tags";
 
 const Credito: NextPage = (): JSX.Element => {
-  // Status:
-  // Pg
+  const router = useRouter();
+  const [Titulo, setTitulo] = useState<string>("");
+  const [Valor, setValor] = useState<string>("");
+  const [Vencimento, setVencimento] = useState<string>("");
+  const [Obs, setObs] = useState<string>("");
+  const [Tag, setTag] = useState<string>("");
+  const [Dpagamento, setDpagamento] = useState<string>("");
+  const [Tpagamento, setTpagamento] = useState<string>("");
+  const [Trasação, setTrasação] = useState<string>("");
+  const [Status, setStatus] = useState<string>("");
+  const [Total, setTotal] = useState<number>(0);
 
-  // Total:
-  // -R$ 15,00
+  const salve = async () => {
+    const data: any = {
+      Titulo,
+      Valor,
+      Vencimento,
+      Obs,
+      Tag,
+      Dpagamento,
+      Tpagamento,
+      Trasação
+    };    
+
+    await fetch("/api/post/credito", {
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+      .then((resp) => resp.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <>
       <div className={style.container}>
@@ -15,43 +45,99 @@ const Credito: NextPage = (): JSX.Element => {
           <div className={style.display1}>
             <div>
               <label>Titulo</label>
-              <input type="text" />
+              <input
+                type="text"
+                onChange={(e) => setTitulo(e.target.value)}
+                value={Titulo}
+              />
             </div>
             <div>
               <label>Valor</label>
-              <input type="text" />
+              <input
+                type="text"
+                onChange={(e) => setValor(e.target.value)}
+                value={Valor}
+              />
             </div>
             <div>
               <label>Vencimento</label>
-              <input type="date" />
+              <input
+                type="date"
+                onChange={(e) => setVencimento(e.target.value)}
+                value={Vencimento}
+              />
             </div>
             <div className={style.obsArea}>
               <label>Obs</label>
-              <textarea />
+              <textarea onChange={(e) => setObs(e.target.value)} value={Obs} />
             </div>
           </div>
           <div className={style.display2}>
             <div>
-              <label>Data de pagamento</label>
-              <input type="date" />
+              <label>Tag:</label>
+              <select onChange={(e) => setTag(e.target.value)} value={Tag}>
+                {Tagsde.map((i: any) => (
+                  <option key={i.id} value={i.tag}>
+                    {i.nome}
+                  </option>
+                ))}
+              </select>
             </div>
             <div>
-              <label>Tipo de pagamento</label>
-              <input type="text" />
+              <label>Data de pagamento:</label>
+              <input
+                type="date"
+                onChange={(e) => setDpagamento(e.target.value)}
+                value={Dpagamento}
+              />
             </div>
-            <div style={{display: 'flex'}}>
-              <label>Status</label>
-              <h3>Pg</h3>
+            <div>
+              <label>Tipo de Trasação:</label>
+              <select
+                onChange={(e) => setTpagamento(e.target.value)}
+                value={Tpagamento}
+              >
+                <option value='Credito'>Credito</option>
+                <option value='Debito'>Debito</option>
+              </select>
+            </div>
+            <div>
+              <label>Tipo de pagamento:</label>
+              <select
+                onChange={(e) => setTpagamento(e.target.value)}
+                value={Tpagamento}
+              >
+                <option value='Credito'>Credito</option>
+                <option value='Debito'>Debito</option>
+                <option value='Pix'>Pix</option>
+                <option value='Boleto'>Boleto</option>
+                <option value='Tranferencia'>Tranferencia</option>
+                <option value='Dinheiro'>Dinheiro</option>
+              </select>
             </div>
           </div>
+          <div style={{ display: "flex", gap: "10px" }}>
+            <label>Status:</label>
+            <h3>{Status}</h3>
+          </div>
           <div className={style.display3}>
-            <div style={{display: 'flex', gap: '10px'}}>
-              <label>Total</label>
-              <h3>R$ 1000,00</h3>
+            <div style={{ display: "flex", gap: "10px" }}>
+              <label>Total:</label>
+              <h3>
+                {Total.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL"
+                })}
+              </h3>
             </div>
             <div className={style.btmArea}>
-              <input type="button" value="Cancelar" />
-              <input type="button" value="Salvar" />
+              <input
+                type="button"
+                value="Cancelar"
+                className={style.btmCancel}
+                onClick={() => router.push("/")}
+              />
+              <input type="button" value="Salvar" className={style.btmSalve} onClick={() => salve() } />
             </div>
           </div>
         </div>

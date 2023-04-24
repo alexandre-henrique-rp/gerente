@@ -15,6 +15,7 @@ const MyApp: FunctionComponent<MyAppProps> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
+  console.log("🚀 ~ file: _app.tsx:18 ~ session:", session)
   return (
     <SessionProvider session={session}>
       <Layout>

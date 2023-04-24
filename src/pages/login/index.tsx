@@ -1,7 +1,9 @@
 import { FormEventHandler, useState } from "react";
 import style from "./style/login.module.css";
-import { signIn } from "next-auth/react";
+import { getSession, signIn } from "next-auth/react";
 import { NextPage } from "next";
+import { getServerSession } from "next-auth/next"
+
 
 const login: NextPage = (): JSX.Element => {
   const [user, setUser] = useState<string>('');
