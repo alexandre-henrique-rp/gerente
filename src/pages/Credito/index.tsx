@@ -1,19 +1,20 @@
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { SetStateAction, useEffect, useState } from "react";
 import style from "./style.module.css";
 import { useRouter } from "next/router";
 import { Tagsde } from "@/components/data/tags";
 
 const Credito: NextPage = (): JSX.Element => {
   const router = useRouter();
+  const DATE = new Date().toISOString();
   const [Titulo, setTitulo] = useState<string>("");
   const [Valor, setValor] = useState<string>("");
-  const [Vencimento, setVencimento] = useState<string>("");
+  const [Vencimento, setVencimento] = useState<any>(DATE);
   const [Obs, setObs] = useState<string>("");
   const [Tag, setTag] = useState<string>("");
-  const [Dpagamento, setDpagamento] = useState<string>("");
+  const [Dpagamento, setDpagamento] = useState<any>(DATE);
   const [Tpagamento, setTpagamento] = useState<string>("");
-  const [Trasação, setTrasação] = useState<string>("");
+  const [trasacao, setTrasacao] = useState<string>("");
   const [Status, setStatus] = useState<string>("");
   const [Total, setTotal] = useState<number>(0);
 
@@ -26,8 +27,8 @@ const Credito: NextPage = (): JSX.Element => {
       Tag,
       Dpagamento,
       Tpagamento,
-      Trasação
-    };    
+      trasacao
+    };
 
     await fetch("/api/post/credito", {
       method: "POST",
@@ -76,6 +77,7 @@ const Credito: NextPage = (): JSX.Element => {
             <div>
               <label>Tag:</label>
               <select onChange={(e) => setTag(e.target.value)} value={Tag}>
+                <option value=""></option>
                 {Tagsde.map((i: any) => (
                   <option key={i.id} value={i.tag}>
                     {i.nome}
@@ -92,13 +94,14 @@ const Credito: NextPage = (): JSX.Element => {
               />
             </div>
             <div>
-              <label>Tipo de Trasação:</label>
+              <label>Tipo de Transação:</label>
               <select
-                onChange={(e) => setTpagamento(e.target.value)}
-                value={Tpagamento}
+                onChange={(e) => setTrasacao(e.target.value)}
+                value={trasacao}
               >
-                <option value='Credito'>Credito</option>
-                <option value='Debito'>Debito</option>
+                <option value=""></option>
+                <option value="Credito">Credito</option>
+                <option value="Debito">Debito</option>
               </select>
             </div>
             <div>
@@ -107,12 +110,13 @@ const Credito: NextPage = (): JSX.Element => {
                 onChange={(e) => setTpagamento(e.target.value)}
                 value={Tpagamento}
               >
-                <option value='Credito'>Credito</option>
-                <option value='Debito'>Debito</option>
-                <option value='Pix'>Pix</option>
-                <option value='Boleto'>Boleto</option>
-                <option value='Tranferencia'>Tranferencia</option>
-                <option value='Dinheiro'>Dinheiro</option>
+                <option value=""></option>
+                <option value="Credito">Credito</option>
+                <option value="Debito">Debito</option>
+                <option value="Pix">Pix</option>
+                <option value="Boleto">Boleto</option>
+                <option value="Tranferencia">Tranferencia</option>
+                <option value="Dinheiro">Dinheiro</option>
               </select>
             </div>
           </div>
@@ -137,7 +141,12 @@ const Credito: NextPage = (): JSX.Element => {
                 className={style.btmCancel}
                 onClick={() => router.push("/")}
               />
-              <input type="button" value="Salvar" className={style.btmSalve} onClick={() => salve() } />
+              <input
+                type="button"
+                value="Salvar"
+                className={style.btmSalve}
+                onClick={() => salve()}
+              />
             </div>
           </div>
         </div>

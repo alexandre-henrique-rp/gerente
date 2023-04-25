@@ -11,6 +11,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
     });
    
     const rest = response.results
+   
 
     const MapResponse = await rest.map((i: any)=>{
       const dados = i.properties

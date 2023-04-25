@@ -7,29 +7,32 @@ const DataBase: any = process.env.NOTION_DATABASE_ID;
 export default async function (req: NextApiRequest, res: NextApiResponse) {
   if (req.method === "POST") {
     const data = JSON.parse(req.body);
-    console.log("🚀 ~ file: credito.ts:10 ~ data:", data.Titulo)
-
+    
     const response: any = await notion.pages.create({
       parent: {
         database_id: DataBase
       },
       properties: {
         vencimento: {
+          type: "date",
           date: {
             start: data.Vencimento
           }
         },
         pagamento: {
+          type: "date",
           date: {
             start: data.Dpagamento
           }
         },
         valor: {
-          number: data.Valor
+          type: "number",
+          number: parseFloat(data.Valor)
         },
         obs: {
           rich_text: [
             {
+              type: "text",
               text: {
                 content: data.Obs
               }
@@ -37,34 +40,37 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
           ]
         },
         tag: {
+          type: "select",
           select: {
             name: data.Tag
           }
         },
         typePg: {
+          type: "select",
           select: {
             name: data.Tpagamento
           }
         },
         trasacao: {
           select: {
-            name: data.trasacao
+            id: data.trasaction == "Credito" ? "~oMU" : "XoWn",
+            name: data.trasaction === ''? null : data.trasaction 
           }
         },
         conta: {
           title: [
             {
+              type: "text",
               text: {
-                content: data.Title,
-              },
+                content: data.Titulo
+              }
             }
           ]
         }
       }
     });
 
-    res.status(200).json(data);
-    // res.status(200).json(response);
+    res.status(200).json(response);
   } else {
     res
       .status(405)
